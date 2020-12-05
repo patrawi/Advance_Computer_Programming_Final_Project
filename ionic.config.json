@@ -1,0 +1,7 @@
+{
+  "name": "demom3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "ionic-angular"
+}
