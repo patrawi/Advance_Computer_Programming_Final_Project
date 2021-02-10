@@ -1,11 +1,77 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Add New Book
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding style = "background-color: #D1A3A3;">
+  <h3 class = "title">Adding New Book</h3>
+  <label for="book" class = "col-sm-2 col-form-label" style = "text-align: right;">Search by Google Book API</label>
+  <p class = "col-sm-6">
+    <ion-searchbar type="text" [(ngModel)] = "bookName" class="form-control" ></ion-searchbar>
+  </p>
+  <button ion-button round color = "danger" (click) = "showinfo(bookName,authorName)" full>Find your Book</button>
 
+ 
+  <h3 *ngIf = "value">Congratulation</h3>
+  <ion-card  *ngFor = "let item of listData" >
+
+    <ion-item>
+      <img src="{{item['thumbnail']}}" alt=""/>
+      <p>Name: {{item['name']}}</p>
+      <p>Authors: {{item['author']}}</p>
+     
+    </ion-item>
+    <ion-item  style = "text-align: center;">
+      <h5  ion-text-center>Is this book correct?</h5>
+      <button ion-button half (click) = "addbook(item['name'])">Yes</button>
+      
+    </ion-item>
+  </ion-card>
+  <div>
+    <p *ngIf = "value">Can't Find your Book</p>
+    <button ion-button full round color = "danger" (click)  = "showform()">
+        Add New Book by yourself
+    </button>
+    <ion-list *ngIf = "new">
+      <ion-item>
+        <ion-label >Book's Title</ion-label>
+        <ion-input [(ngModel)] = "name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >Book's Author</ion-label>
+        <ion-input [(ngModel)] = "author"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >Book's Rating</ion-label>
+        <ion-input [(ngModel)] = "rating"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >Book's Review</ion-label>
+        <ion-input [(ngModel)] = "review"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >Book's Genre</ion-label>
+        <ion-input [(ngModel)] = "genre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >Book's Price</ion-label>
+        <ion-input [(ngModel)] = "price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >Book's thumbnail</ion-label>
+        <ion-input [(ngModel)] = "thumbnail"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >Book's Year</ion-label>
+        <ion-input [(ngModel)] = "year"></ion-input>
+      </ion-item>
+      <button ion-button round color = "warning" full (click) = "addbookuser(name,author,rating,review,price,thumbnail,genre,year)">Create New Book</button>
+    </ion-list>
+  </div>
 </ion-content>
+
+
+ 

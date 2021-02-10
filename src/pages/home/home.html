@@ -1,17 +1,59 @@
+
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding style = "background-color: #D1A3A3;">
+  <h4 class = "title">Welcome to The Curator</h4>
+  <label for="search" class = "col-sm-2 col-form-label" text-wrap>There are 2 kinds of searchbar in our app</label>
+  <div class = "col-sm-6">
+    <p>- Searhbar Pipe</p>
+   <ion-searchbar  type="text" [(ngModel)] = "searchValue" class = "searchbar"></ion-searchbar>
+    <p>- Searhbar by Book's Name</p>
+    <ion-searchbar type="text" [(ngModel)] = "bookname"  class = "searchbar" placeholder = "Becoming"></ion-searchbar>
+    <button ion-button round color = "danger" (click) ="getbook(bookname)" full class = "but">Find your Book</button>
+  </div>
+
+
+
+  <ion-card *ngIf = "value" >
+    
+    <div *ngFor = "let item of list">
+      Congratulation
+      <img src = "{{item['thumbnail']}}" alt = "no" />
+    
+    <ion-card-header>
+      <ion-card-title class = "name" text-wrap>{{item['name']}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngFor = "let item of list">
+      <p>Author: {{item['author']}}</p>
+      <p>Rating: {{item['rating']}} </p>
+      <p>Review Count: {{item['review']}}</p>
+      <p>Genre: {{item['genre']}}</p>
+      <p>Price: {{item['price']}} <ion-icon name="logo-usd"></ion-icon></p>
+
+    </ion-card-content>
+    </div>
+  </ion-card>
+  <ion-card *ngFor = "let item of itemsListData | searchfilter: searchValue" style = "border-radius: 20;">
+    <img src="{{item.thumbnail}}" />
+    <ion-card-content>
+      <p class = "name" text-wrap>{{item.name}}</p>
+      <p>Author: {{item.author}}</p>
+      <p>Rating: {{item.rating}} </p>
+      <p>Review Count: {{item.review}}</p>
+      <p>Genre: {{item.genre}}</p>
+      <p>Year: {{item.year}}</p>
+      <p>Price: {{item.price}} <ion-icon name="logo-usd"></ion-icon></p>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner = "bubbles" loadingText = "Loading">
+
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+<script src="app.js"></script>
